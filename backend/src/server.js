@@ -4,6 +4,7 @@ import { connetDB } from "./config/db.js";
 import cors from "cors"
 import {clerkMiddleware} from "@clerk/express"
 import userRoutes from "./routes/user.route.js";
+import { postRoute } from "./routes/post.route.js";
 const app = express();
 
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(clerkMiddleware());
 app.get("/", (req, res) => res.send("Hlo"))
 
 app.use("/api/users",userRoutes)
+app.use("/api/posts",postRoute)
 
 const startServer = async () => {
     try {
