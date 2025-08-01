@@ -1,13 +1,14 @@
 import asyncHandler from "express-async-handler"
 import User from "../models/user.model.js";
-import { clerkClient, getAuth } from "@clerk/express"
+import {  getAuth } from "@clerk/express"
 import Notification from "../models/notification.model.js";
 import Post from "../models/post.model.js";
 import cloudinary from "cloudinary"
+import Comment from "../models/comment.model.js";
 
 
-export const getPosts  = asyncHandler(async(req,res)=>{
-     const posts = await Post.find()
+export const getPosts = asyncHandler(async (req, res) => {
+  const posts = await Post.find()
     .sort({ createdAt: -1 })
     .populate("user", "username firstName lastName profilePicture")
     .populate({
@@ -110,6 +111,8 @@ export const createPost = asyncHandler(async (req, res) => {
 
   res.status(201).json({ post });
 });
+
+
 
 
 
